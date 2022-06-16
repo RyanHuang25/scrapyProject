@@ -13,12 +13,7 @@ from DBUtils.PersistentDB import PersistentDB
 from scrapyProject.tools.print_color import print_green,print_red
 from scrapyProject.tools.get_md5 import get_dict_md5
 
-class ScrapyprojectPipeline:
-    def process_item(self, item, spider):
-        return item
-
-class APPPipeline:
-
+class ConnectMySQL:
     def __init__(self):
         self.pool = PersistentDB(
             creator=pymysql,  # 使用链接数据库的模块
@@ -80,7 +75,7 @@ class APPPipeline:
                 pass
         return item_key
 
-    def insert_data(self, item, table_name, drop_column=['id', 'create'],not_empty=[]):
+    def insert_data(self, item, table_name, drop_column=['id', 'created'],not_empty=[]):
         '''
         写入mysql数据库
         :param item: 数据内容，字典类型
@@ -102,7 +97,6 @@ class APPPipeline:
                 else:
                     values += f'"{value}",'
         sql = f'insert into {table_name} ({",".join(item.keys())}) values ({values[:-1]})'
-        print(sql)
         conn, cursor = self.connect_conn()
         try:
             cursor.execute(sql)
@@ -110,13 +104,40 @@ class APPPipeline:
             print_green(f"{sql}")
         except Exception as e:
             print_red(e)
+            print_red(sql)
         self.close_conn(conn, cursor)
 
     def close_conn(self, conn, cursor):
         cursor.close()
         conn.close()
 
+class ScrapyprojectPipeline:
     def process_item(self, item, spider):
+        return item
+
+class APPPipeline:
+
+    def open_spider(self,spider):
+        pass
+
+    def process_item(self, item, spider):
+        if 'app' in spider.name:
+            self.conn = ConnectMySQL()
+        else:
+            return item
         item['md5'] = get_dict_md5(item)
-        print(item)
-        self.insert_data(item,table_name="app_list")
+        self.conn.insert_data(item,table_name="app_list")
+
+
+class WangyiPipeline:
+
+    def open_spider(self,spider):
+        pass
+
+    def process_item(self, item, spider):
+        if 'news' in spider.name:
+            self.conn = ConnectMySQL()
+            item['md5'] = get_dict_md5(item)
+            self.conn.insert_data(item, table_name="t_163_news")
+        else:
+            return item
