@@ -26,4 +26,15 @@ class ScrapyprojectPipeline:
     def process_item(self, item, spider):
         return item
 
-
+class ContactPipeline:
+    '''
+    企业联系方式redis存储
+    '''
+    def process_item(self,item):
+        url_md5 = encryp.get_dict_md5(item)
+        if pika.hexists(f"{item['source']}_contact_fingerprint",url_md5):
+            println.print_yellow(f'指纹已存在：{item["url"]}')
+        else:
+            pika.lpush(f"{item['source']}_contact",json.dumps(item))
+            pika.hset(f"{item['source']}_contact_fingerprint",url_md5,item['url'])
+        return item
