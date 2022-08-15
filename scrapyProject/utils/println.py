@@ -10,7 +10,7 @@
 import datetime
 from colorama import init, Fore
 
-init(autoreset=True)
+# init(autoreset=True)
 
 def print_red(text):
     print(f"{datetime.datetime.now()} ----- {Fore.RED}{text}")

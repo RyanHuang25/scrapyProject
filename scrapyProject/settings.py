@@ -74,12 +74,7 @@ ROBOTSTXT_OBEY = False
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    # 'scrapyProject.pipelines.ScrapyprojectPipeline': 300,
-<<<<<<< HEAD
    'scrapyProject.pipelines.ContactPipeline': 300,
-=======
-   'scrapyProject.pipelines.APPPipeline': 300,
-   "scrapyProject.pipelines.WangyiPipeline": 300,
->>>>>>> b22a8b31f560d2df2875c1a304e4ab85b6f97bac
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
