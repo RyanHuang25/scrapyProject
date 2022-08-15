@@ -6,7 +6,7 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-import scrapyProject.pipelines
+# import scrapyProject.pipelines
 
 BOT_NAME = 'scrapyProject'
 
@@ -17,6 +17,11 @@ MYSQL_HOST = 'rm-bp10ml3j7a2t88hv03o.mysql.rds.aliyuncs.com'
 MYSQL_PORT = 3306
 MYSQL_USER = 'roothuang'
 MYSQL_PASSWD = 'huang123@'
+
+REDIS_HOST = '47.108.199.19'
+REDIS_PORT = 8379
+REDIS_DB = 3
+REDIS_PASSWD = 'spider666.'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'scrapyProject (+http://www.yourdomain.com)'
@@ -69,7 +74,7 @@ ROBOTSTXT_OBEY = False
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    # 'scrapyProject.pipelines.ScrapyprojectPipeline': 300,
-   'scrapyProject.pipelines.APPPipeline': 300
+   'scrapyProject.pipelines.ContactPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -1,10 +1,10 @@
 # -*- coding: utf8 -*-
 '''
-@Author : huangrenwu
-@File: get_md5.py
-@Time: 2022/5/23 17:34
+@Author: huangrenwu
+@File: encryp.py
+@Time: 2022/8/6 12:09
 @Email: leo.r.huang@microcore.tech
-@Desc: 
+加密，所有的加密方法都可以写到这里，方便调用
 '''
 
 import hashlib

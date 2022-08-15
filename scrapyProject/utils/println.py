@@ -1,14 +1,13 @@
 # -*- coding: utf8 -*-
 '''
-@Author : huangrenwu
-@File: print_color.py
-@Time: 2022/5/23 17:33
+@Author: huangrenwu
+@File: println.py
+@Time: 2022/8/6 12:11
 @Email: leo.r.huang@microcore.tech
-@Desc: 
+输出，格式个样的输出方式
 '''
 
 import datetime
-
 from colorama import init, Fore
 
 init(autoreset=True)
